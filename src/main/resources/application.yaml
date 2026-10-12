@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: accounting-gateway
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: false
+server:
+  port: 8000

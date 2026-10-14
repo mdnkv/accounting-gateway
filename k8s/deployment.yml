@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: accounting-gateway
+  labels:
+    app: accounting-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: accounting-gateway
+  template:
+    metadata:
+      labels:
+        app: accounting-gateway
+    spec:
+      containers:
+        - name: accounting-gateway
+          image: accounting-gateway
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            - name: BPL_JVM_THREAD_COUNT
+              value: "50"
+          livenessProbe:
+            httpGet:
+              port: 8000
+              path: /actuator/health/liveness
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              port: 8000
+              path: /actuator/health/readiness
+            initialDelaySeconds: 10
+            periodSeconds: 10

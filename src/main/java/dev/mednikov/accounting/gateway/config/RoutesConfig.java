@@ -11,12 +11,12 @@ public class RoutesConfig {
     @Bean
     public RouteLocator routeLocator (RouteLocatorBuilder builder){
         return builder.routes()
-                .route("organizations", r->r.path("/organizations/**").uri("http://localhost:8001"))
-                .route("accounts", r->r.path("/accounts/**").uri("http://localhost:8002"))
-                .route("account-categories", r->r.path("/account-categories/**").uri("http://localhost:8002"))
-                .route("journals", r->r.path("/journals/**").uri("http://localhost:8002"))
-                .route("currencies", r->r.path("/currencies/**").uri("http://localhost:8002"))
-                .route("user-roles", r->r.path("/user-roles/**").uri("http://localhost:8003"))
+                .route("organizations", r->r.path("/organizations/**").uri("http://accounting-organization"))
+                .route("accounts", r->r.path("/accounts/**").uri("http://accounting-ledger"))
+                .route("account-categories", r->r.path("/account-categories/**").uri("http://accounting-ledger"))
+                .route("journals", r->r.path("/journals/**").uri("http://accounting-ledger"))
+                .route("currencies", r->r.path("/currencies/**").uri("http://accounting-ledger"))
+                .route("user-roles", r->r.path("/user-roles/**").uri("http://accounting-authz"))
                 .build();
     }
 

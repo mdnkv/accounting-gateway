@@ -71,4 +71,4 @@ jobs:
           username: ${{github.actor}}
           password: ${{secrets.GITHUB_TOKEN}}
       - name: Publish
-        run: docker run ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:${{env.VERSION}}
+        run: docker push ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:${{env.VERSION}}

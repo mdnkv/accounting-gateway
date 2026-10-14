@@ -23,15 +23,17 @@ spec:
           env:
             - name: BPL_JVM_THREAD_COUNT
               value: "50"
+            - name: KEYCLOAK_URL
+              value: "http://accounting-keycloak:8080/realms/accounting"
           livenessProbe:
             httpGet:
               port: 8000
               path: /actuator/health/liveness
-            initialDelaySeconds: 10
-            periodSeconds: 10
+            initialDelaySeconds: 15
+            periodSeconds: 15
           readinessProbe:
             httpGet:
               port: 8000
               path: /actuator/health/readiness
-            initialDelaySeconds: 10
-            periodSeconds: 10
+            initialDelaySeconds: 15
+            periodSeconds: 15

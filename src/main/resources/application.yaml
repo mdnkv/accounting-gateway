@@ -8,8 +8,13 @@ spring:
           discovery:
             locator:
               enabled: false
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_URL}
 server:
-  port: 8000
+  port: ${HTTP_PORT:8000}
 management:
   endpoints:
     web:

@@ -25,6 +25,8 @@ spec:
               value: "50"
             - name: KEYCLOAK_URL
               value: "http://accounting-keycloak:8080/realms/accounting"
+            - name: APP_SIGNING_KEY
+              value: "12345"
           livenessProbe:
             httpGet:
               port: 8000

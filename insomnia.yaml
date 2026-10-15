@@ -1,0 +1,432 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: accounting-microservices-demo
+meta:
+  id: wrk_88e522a24419467d9e6f6ca261a16d6e
+  created: 1792009837899
+  modified: 1792009837899
+  description: ""
+collection:
+  - name: Organizations
+    meta:
+      id: fld_b72965ccfc2c499a80237891c3d96c5e
+      created: 1792009968864
+      modified: 1792009968864
+      sortKey: -1792009968864
+      description: ""
+    children:
+      - url: "{{_.root_url}}/organizations"
+        name: Create organization
+        meta:
+          id: req_643baca1527e49b1873d365b9d35c0c7
+          created: 1792009972697
+          modified: 1792010098533
+          isPrivate: false
+          description: ""
+          sortKey: -1792009972697
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name":"My new organization"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: oauth2
+          grantType: authorization_code
+          accessTokenUrl: "{{ _.keycloak_token_url }}"
+          authorizationUrl: "{{_.keycloak_auth_url}}"
+          clientId: "{{ _.keycloak_client_id }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{_.root_url}}/organizations/:id"
+        name: Get organization by id
+        meta:
+          id: req_905f9c5bf9c544a6bb328c8016a9111a
+          created: 1792018255142
+          modified: 1792018273948
+          isPrivate: false
+          description: ""
+          sortKey: -1792009972647
+        method: GET
+        authentication:
+          type: oauth2
+          grantType: authorization_code
+          accessTokenUrl: "{{ _.keycloak_token_url }}"
+          authorizationUrl: "{{_.keycloak_auth_url}}"
+          clientId: "{{ _.keycloak_client_id }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: id
+            value: "{{_.current_organization_id}}"
+      - url: "{{_.root_url}}/organizations"
+        name: Update organization
+        meta:
+          id: req_5e6b7342b9334e32b2a4a206572c83b1
+          created: 1792018284420
+          modified: 1792064957451
+          isPrivate: false
+          description: ""
+          sortKey: -1792009972672
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name":"My organization",
+            	"id": "{{_.current_organization_id}}"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: oauth2
+          grantType: authorization_code
+          accessTokenUrl: "{{ _.keycloak_token_url }}"
+          authorizationUrl: "{{_.keycloak_auth_url}}"
+          clientId: "{{ _.keycloak_client_id }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{_.root_url}}/organizations/:id"
+        name: Delete organization
+        meta:
+          id: req_2b6e4236b6e04c139cb1fc3df0472bc7
+          created: 1792018316636
+          modified: 1792018319505
+          isPrivate: false
+          description: ""
+          sortKey: -1792009972597
+        method: DELETE
+        authentication:
+          type: oauth2
+          grantType: authorization_code
+          accessTokenUrl: "{{ _.keycloak_token_url }}"
+          authorizationUrl: "{{_.keycloak_auth_url}}"
+          clientId: "{{ _.keycloak_client_id }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: id
+            value: "{{_.current_organization_id}}"
+  - name: Authz
+    meta:
+      id: fld_710198aab02c40ccacca5863e713af67
+      created: 1792061673845
+      modified: 1792061673845
+      sortKey: -1792061673845
+      description: ""
+    children:
+      - name: Authorities
+        meta:
+          id: fld_ace574a3481249d1b56456ce02666ca3
+          created: 1792061678431
+          modified: 1792061678431
+          sortKey: -1792061678431
+          description: ""
+        children:
+          - url: "{{_.root_url}}/authorities"
+            name: Get all authorities
+            meta:
+              id: req_4c850fc6ec404404a4f691f0d670d40c
+              created: 1792061698547
+              modified: 1792064828544
+              isPrivate: false
+              description: ""
+              sortKey: -1792061698547
+            method: GET
+            authentication:
+              type: oauth2
+              grantType: authorization_code
+              accessTokenUrl: "{{ _.keycloak_token_url }}"
+              authorizationUrl: "{{ _.keycloak_auth_url }}"
+              clientId: "{{_.keycloak_client_id}}"
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - name: Roles
+        meta:
+          id: fld_63d9a983807443e982967698f5e91dfc
+          created: 1792061683022
+          modified: 1792061683022
+          sortKey: -1792061683022
+          description: ""
+        children:
+          - url: "{{_.root_url}}/roles"
+            name: Get roles for organization
+            meta:
+              id: req_668a5f40b5114e3c933c98f3e50e2675
+              created: 1792061715068
+              modified: 1792064560816
+              isPrivate: false
+              description: ""
+              sortKey: -1792061715068
+            method: GET
+            parameters:
+              - name: organizationId
+                value: "{{_.current_organization_id}}"
+                description: ""
+                disabled: false
+            authentication:
+              type: oauth2
+              grantType: authorization_code
+              accessTokenUrl: "{{_.keycloak_token_url}}"
+              authorizationUrl: "{{_.keycloak_auth_url}}"
+              clientId: "{{_.keycloak_client_id}}"
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{_.root_url}}/roles"
+            name: Create role
+            meta:
+              id: req_5be72915cdc143169b79715abd1ab5e1
+              created: 1792061756484
+              modified: 1792064906148
+              isPrivate: false
+              description: ""
+              sortKey: -1792061756484
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"organizationId":"{{_.current_organization_id}}",
+                	"name":"Administrator",
+                	"authorities":[
+                		"01a13f5d-6cd3-75a0-a8e1-031947c4bd18"
+                	]
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+            authentication:
+              type: oauth2
+              grantType: authorization_code
+              accessTokenUrl: "{{_.keycloak_token_url}}"
+              authorizationUrl: "{{_.keycloak_auth_url}}"
+              clientId: "{{ _.keycloak_client_id }}"
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{_.root_url}}/roles/:id"
+            name: Delete role
+            meta:
+              id: req_c4b5f0fa407247a98d31212cfb531975
+              created: 1792061820277
+              modified: 1792064496148
+              isPrivate: false
+              description: ""
+              sortKey: -1792061735776
+            method: DELETE
+            authentication:
+              type: oauth2
+              grantType: authorization_code
+              accessTokenUrl: "{{_.keycloak_token_url}}"
+              authorizationUrl: "{{_.keycloak_auth_url}}"
+              clientId: "{{_.keycloak_client_id}}"
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+            pathParameters:
+              - name: id
+                value: "1"
+          - url: "{{_.root_url}}/roles"
+            name: Update role
+            meta:
+              id: req_572ccc5c15874072b5bd7dc474315f09
+              created: 1792062396560
+              modified: 1792064473938
+              isPrivate: false
+              description: ""
+              sortKey: -1792061746130
+            method: PUT
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"id":"01a13f3d-f5e8-7bae-ba6b-15be502ddf3a",
+                	"organizationId":"{{_.current_organization_id}}",
+                	"name":"Administrator updated",
+                	"authorities":[
+                		"01a13f3d-4b6b-794e-8c96-926c932541df",
+                		"01a13f3d-4b6b-7e12-96d8-447e747ab8e9"
+                	]
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+            authentication:
+              type: oauth2
+              grantType: authorization_code
+              accessTokenUrl: "{{_.keycloak_token_url}}"
+              authorizationUrl: "{{_.keycloak_auth_url}}"
+              clientId: "{{ _.keycloak_client_id }}"
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - name: User roles
+        meta:
+          id: fld_6000b923575a4da99f540717b35747db
+          created: 1792062490339
+          modified: 1792062490339
+          sortKey: -1792062490339
+          description: ""
+        children:
+          - url: "{{_.root_url}}/user-roles/user/{{_.current_user_id}}"
+            name: Get user roles
+            meta:
+              id: req_d4572338d8e24415a8ce355d308de77a
+              created: 1792062492077
+              modified: 1792064204785
+              isPrivate: false
+              description: ""
+              sortKey: -1792062492077
+            method: GET
+            authentication:
+              type: oauth2
+              grantType: authorization_code
+              accessTokenUrl: "{{ _.keycloak_token_url }}"
+              authorizationUrl: "{{ _.keycloak_auth_url }}"
+              clientId: "{{ _.keycloak_client_id }}"
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{_.root_url}}/user-roles/current/{{_.current_user_id}}"
+            name: Get current user role
+            meta:
+              id: req_be857dc1c230429cacca31fe513d88ae
+              created: 1792062592919
+              modified: 1792064338929
+              isPrivate: false
+              description: ""
+              sortKey: -1792062124280.5
+            method: GET
+            authentication:
+              type: oauth2
+              grantType: authorization_code
+              accessTokenUrl: "{{_.keycloak_token_url}}"
+              authorizationUrl: "{{ _.keycloak_auth_url }}"
+              clientId: "{{_.keycloak_client_id}}"
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{_.root_url}}/user-roles"
+            name: Create user role
+            meta:
+              id: req_f97f7ad92cdb411d83ce484e3fa0d017
+              created: 1792063903629
+              modified: 1792064923394
+              isPrivate: false
+              description: ""
+              sortKey: -1792063903629
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"roleId":"01a13f64-6846-727e-ade4-28d01d1ea877",
+                	"userId":"{{_.current_user_id}}"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+            authentication:
+              type: oauth2
+              grantType: authorization_code
+              accessTokenUrl: "{{ _.keycloak_token_url }}"
+              authorizationUrl: "{{ _.keycloak_auth_url }}"
+              clientId: "{{ _.keycloak_client_id }}"
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_52b531fa3fe915d31ebd1549b028163570bc0df8
+    created: 1792009837903
+    modified: 1792009837903
+environments:
+  name: Base Environment
+  meta:
+    id: env_52b531fa3fe915d31ebd1549b028163570bc0df8
+    created: 1792009837901
+    modified: 1792064862309
+    isPrivate: false
+  data:
+    root_url: http://localhost:8000
+    keycloak_url: http://accounting-keycloak:8080
+    keycloak_realm: accounting
+    keycloak_auth_url: "{{_.keycloak_url}}/realms/{{_.keycloak_realm}}/protocol/ope\
+      nid-connect/auth"
+    keycloak_token_url: "{{_.keycloak_url}}/realms/{{_.keycloak_realm}}/protocol/op\
+      enid-connect/token "
+    keycloak_client_id: accounting-rest
+    current_organization_id: 01a13f63-99ca-715a-834e-64428e2b7109
+    current_user_id: 39115104-ed1b-4b82-a2ab-30f049f9f4a8

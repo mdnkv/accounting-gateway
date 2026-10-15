@@ -17,6 +17,8 @@ public class RoutesConfig {
                 .route("journals", r->r.path("/journals/**").uri("http://accounting-ledger"))
                 .route("currencies", r->r.path("/currencies/**").uri("http://accounting-ledger"))
                 .route("user-roles", r->r.path("/user-roles/**").uri("http://accounting-authz"))
+                .route("roles", r->r.path("/roles/**").uri("http://accounting-authz"))
+                .route("authorities", r->r.path("/authorities/**").uri("http://accounting-authz"))
                 .build();
     }
 

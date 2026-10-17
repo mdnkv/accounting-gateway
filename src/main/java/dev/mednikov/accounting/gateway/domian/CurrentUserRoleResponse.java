@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.UUID;
 
 public record CurrentUserRoleResponse(
-        UUID id,
+        UUID userId,
+        boolean hasRole,
         UUID organizationId,
-        RoleResponse role
+        String roleName,
+        List<String> authorities
 ) {
 }

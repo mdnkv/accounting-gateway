@@ -1,7 +1,7 @@
 package dev.mednikov.accounting.gateway.filters;
 
-import dev.mednikov.accounting.gateway.clients.CurrentUserAuthoritiesClient;
-import dev.mednikov.accounting.gateway.services.AuthzTokenService;
+import dev.mednikov.accounting.gateway.clients.CurrentUserRoleClient;
+import dev.mednikov.accounting.gateway.services.AuthorizationTokenService;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -19,12 +19,12 @@ import java.util.UUID;
 @Component
 public class AuthorizationFilter implements GlobalFilter, Ordered {
 
-    private final CurrentUserAuthoritiesClient authoritiesClient;
-    private final AuthzTokenService authzTokenService;
+    private final CurrentUserRoleClient currentUserRoleClient;
+    private final AuthorizationTokenService authorizationTokenService;
 
-    public AuthorizationFilter(CurrentUserAuthoritiesClient authoritiesClient, AuthzTokenService authzTokenService) {
-        this.authoritiesClient = authoritiesClient;
-        this.authzTokenService = authzTokenService;
+    public AuthorizationFilter(CurrentUserRoleClient currentUserRoleClient, AuthorizationTokenService authorizationTokenService) {
+        this.currentUserRoleClient = currentUserRoleClient;
+        this.authorizationTokenService = authorizationTokenService;
     }
 
     @Override
@@ -36,14 +36,14 @@ public class AuthorizationFilter implements GlobalFilter, Ordered {
                 .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.UNAUTHORIZED)))
                 .flatMap(subject -> {
                     UUID userId = UUID.fromString(subject);
-                    return authoritiesClient.getAuthorities(userId);
+                    return this.currentUserRoleClient.getCurrentUserRole(userId);
                 })
-                .flatMap(authorities -> {
-                    String authzToken = authzTokenService.getAuthzToken(authorities);
+                .flatMap(currentUserRole -> {
+                    String authorizationToken = this.authorizationTokenService.getAuthorizationToken(currentUserRole);
                     var mutatedRequest = exchange.getRequest().mutate()
                             .headers(headers -> {
                                 headers.remove(HttpHeaders.AUTHORIZATION);
-                                headers.set("X-APP-AUTHZ-TOKEN", authzToken);
+                                headers.set("X-APP-AUTHORIZATION", authorizationToken);
                             }).build();
                     ServerWebExchange mutatedExchange = exchange.mutate().request(mutatedRequest).build();
                     return chain.filter(mutatedExchange);

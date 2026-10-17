@@ -8,17 +8,23 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RoutesConfig {
 
+    private final RouteLocation routeLocation;
+
+    public RoutesConfig(RouteLocation routeLocation) {
+        this.routeLocation = routeLocation;
+    }
+
     @Bean
     public RouteLocator routeLocator (RouteLocatorBuilder builder){
         return builder.routes()
-                .route("organizations", r->r.path("/organizations/**").uri("http://accounting-organization"))
-                .route("accounts", r->r.path("/accounts/**").uri("http://accounting-ledger"))
-                .route("account-categories", r->r.path("/account-categories/**").uri("http://accounting-ledger"))
-                .route("journals", r->r.path("/journals/**").uri("http://accounting-ledger"))
-                .route("currencies", r->r.path("/currencies/**").uri("http://accounting-ledger"))
-                .route("user-roles", r->r.path("/user-roles/**").uri("http://accounting-authz"))
-                .route("roles", r->r.path("/roles/**").uri("http://accounting-authz"))
-                .route("authorities", r->r.path("/authorities/**").uri("http://accounting-authz"))
+                .route("organizations", r->r.path("/organizations/**").uri(routeLocation.organizationServiceLocation()))
+                .route("accounts", r->r.path("/accounts/**").uri(routeLocation.ledgerServiceLocation()))
+                .route("account-categories", r->r.path("/account-categories/**").uri(routeLocation.ledgerServiceLocation()))
+                .route("journals", r->r.path("/journals/**").uri(routeLocation.ledgerServiceLocation()))
+                .route("currencies", r->r.path("/currencies/**").uri(routeLocation.ledgerServiceLocation()))
+                .route("user-roles", r->r.path("/user-roles/**").uri(routeLocation.roleServiceLocation()))
+                .route("roles", r->r.path("/roles/**").uri(routeLocation.roleServiceLocation()))
+                .route("authorities", r->r.path("/authorities/**").uri(routeLocation.roleServiceLocation()))
                 .build();
     }
 

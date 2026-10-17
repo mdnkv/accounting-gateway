@@ -30,3 +30,7 @@ management:
             - readinessState
 app:
   signing-key: ${APP_SIGNING_KEY}
+  locations:
+    organization-service-location: ${APP_ORGANIZATION_SERVICE_LOCATION}
+    ledger-service-location: ${APP_LEDGER_SERVICE_LOCATION}
+    role-service-location: ${APP_ROLE_SERVICE_LOCATION}

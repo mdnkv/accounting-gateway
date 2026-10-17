@@ -27,6 +27,12 @@ spec:
               value: "http://accounting-keycloak:8080/realms/accounting"
             - name: APP_SIGNING_KEY
               value: "12345"
+            - name: APP_ORGANIZATION_SERVICE_LOCATION
+              value: "http://accounting-organization"
+            - name: APP_ORGANIZATION_LEDGER_LOCATION
+              value: "http://accounting-ledger"
+            - name: APP_ROLE_SERVICE_LOCATION
+              value: "http://accounting-authz"
           livenessProbe:
             httpGet:
               port: 8000

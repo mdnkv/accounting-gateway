@@ -28,13 +28,16 @@ public final class AuthorizationTokenServiceImpl implements AuthorizationTokenSe
         try {
             // Create signer
             JWSSigner signer = new MACSigner(key);
+            String organizationId = (currentUserRole.organizationId() != null)
+                    ? currentUserRole.organizationId().toString()
+                    : "";
 
             // Create claims set
             JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
                     .subject(currentUserRole.userId().toString())
                     .issuer("http://accounting-gateway")
                     .claim("authorities", currentUserRole.authorities())
-                    .claim("organizationId", currentUserRole.organizationId().toString())
+                    .claim("organizationId", organizationId)
                     .build();
 
             // Create signed JWT

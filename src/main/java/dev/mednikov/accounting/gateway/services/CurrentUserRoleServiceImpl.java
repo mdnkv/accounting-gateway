@@ -25,6 +25,14 @@ public class CurrentUserRoleServiceImpl implements CurrentUserRoleService{
     }
 
     @Override
+    public Mono<Void> revokeContext(String userId) {
+        return this.redisTemplate.opsForValue().delete(userId).flatMap(result -> {
+            logger.info("Current context revoked for user {}: {}", userId, result.toString());
+            return Mono.empty();
+        });
+    }
+
+    @Override
     public Mono<CurrentUserRoleResponse> getCurrentUserRole(String userId) {
         logger.info("Fetching active context for user {}", userId);
         return this.redisTemplate

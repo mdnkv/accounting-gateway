@@ -27,6 +27,10 @@ spec:
               value: "http://accounting-keycloak:8080/realms/accounting"
             - name: APP_SIGNING_KEY
               value: "12345"
+            - name: SPRING_DATA_REDIS_HOST
+              value: "accounting-gateway-redis"
+            - name: SPRING_DATA_REDIS_PORT
+              value: "6379"
             - name: APP_ORGANIZATION_SERVICE_LOCATION
               value: "http://accounting-organization"
             - name: APP_ORGANIZATION_LEDGER_LOCATION

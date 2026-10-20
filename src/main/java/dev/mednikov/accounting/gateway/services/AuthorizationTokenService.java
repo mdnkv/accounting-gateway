@@ -1,6 +1,6 @@
 package dev.mednikov.accounting.gateway.services;
 
-import dev.mednikov.accounting.gateway.domian.CurrentUserRoleResponse;
+import dev.mednikov.accounting.gateway.domain.CurrentUserRoleResponse;
 
 public interface AuthorizationTokenService {
 

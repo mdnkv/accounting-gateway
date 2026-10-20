@@ -1,7 +1,7 @@
 package dev.mednikov.accounting.gateway.clients;
 
 import dev.mednikov.accounting.gateway.config.RouteLocation;
-import dev.mednikov.accounting.gateway.domian.CurrentUserRoleResponse;
+import dev.mednikov.accounting.gateway.domain.CurrentUserRoleResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;

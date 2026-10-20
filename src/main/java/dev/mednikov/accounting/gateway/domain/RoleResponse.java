@@ -1,4 +1,4 @@
-package dev.mednikov.accounting.gateway.domian;
+package dev.mednikov.accounting.gateway.domain;
 
 import java.util.List;
 

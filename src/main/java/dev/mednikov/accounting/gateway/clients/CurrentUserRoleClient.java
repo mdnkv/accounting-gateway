@@ -1,6 +1,6 @@
 package dev.mednikov.accounting.gateway.clients;
 
-import dev.mednikov.accounting.gateway.domian.CurrentUserRoleResponse;
+import dev.mednikov.accounting.gateway.domain.CurrentUserRoleResponse;
 import reactor.core.publisher.Mono;
 
 import java.util.UUID;

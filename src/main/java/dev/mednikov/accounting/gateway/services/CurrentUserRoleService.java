@@ -7,5 +7,7 @@ public interface CurrentUserRoleService {
 
     Mono<CurrentUserRoleResponse> getCurrentUserRole (String userId);
 
+    Mono<Void> revokeContext (String userId);
+
 
 }

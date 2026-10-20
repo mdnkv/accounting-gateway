@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: accounting-gateway-redis
+  labels:
+    db: accounting-gateway-redis
+spec:
+  selector:
+    matchLabels:
+      db: accounting-gateway-redis
+  template:
+    metadata:
+      labels:
+        db: accounting-gateway-redis
+    spec:
+      containers:
+        - name: accounting-gateway-redis
+          image: redis:8.6.4
+          resources:
+            requests:
+              cpu: 100m
+              memory: 50Mi
+            limits:
+              cpu: 200m
+              memory: 100Mi
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: accounting-gateway-redis
+  labels:
+    db: accounting-gateway-redis
+spec:
+  type: ClusterIP
+  selector:
+    db: accounting-gateway-redis
+  ports:
+    - protocol: TCP
+      port: 6379
+      targetPort: 6379

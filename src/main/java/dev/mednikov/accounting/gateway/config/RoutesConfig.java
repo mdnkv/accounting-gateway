@@ -8,9 +8,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RoutesConfig {
 
-    private final RouteLocation routeLocation;
+    private final RouteLocationProperties routeLocation;
 
-    public RoutesConfig(RouteLocation routeLocation) {
+    public RoutesConfig(RouteLocationProperties routeLocation) {
         this.routeLocation = routeLocation;
     }
 

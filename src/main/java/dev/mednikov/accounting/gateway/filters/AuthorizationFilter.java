@@ -1,6 +1,5 @@
 package dev.mednikov.accounting.gateway.filters;
 
-import dev.mednikov.accounting.gateway.clients.CurrentUserRoleClient;
 import dev.mednikov.accounting.gateway.services.AuthorizationTokenService;
 import dev.mednikov.accounting.gateway.services.CurrentUserRoleService;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
